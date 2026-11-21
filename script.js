@@ -139,12 +139,28 @@
   d.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
 
   /* ---------- мобильный герой: сцене достаётся место над текстом ---------- */
+  /* лампа фона: на широких экранах кадр режется сверху, абажур уезжал под телефон в шапке - опускаем ниже шапки */
+  function fitLamp() {
+    var svg = $('.hero__shop'), lamp = $('.shop__lamp'); if (!svg || !lamp) return;
+    var W = svg.clientWidth, H = svg.clientHeight; if (!W || !H) return;
+    var sc = Math.max(W / 1600, H / 900), top = H - 900 * sc + 80 * sc;
+    var hdr = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 76;
+    var t = Math.max(0, (hdr + 24 - top) / sc);
+    lamp.setAttribute('transform', 'translate(0 ' + t.toFixed(1) + ')');
+  }
+
   function fitHero() {
+    fitLamp();
     var h = $('.hero'), tx = $('.hero__txt'); if (!h || !tx) return;
-    if (window.innerWidth > 900) { h.style.removeProperty('--txh'); var s0 = $('.scene'); if (s0) s0.style.removeProperty('--lbfs'); return; }
+    if (window.innerWidth > 900) { h.style.removeProperty('--txh'); var s0 = $('.scene'); if (s0) { s0.style.removeProperty('--lbfs'); s0.classList.remove('no-lb'); } return; }
     h.style.setProperty('--txh', Math.ceil(tx.getBoundingClientRect().height) + 'px');
     /* подписи деталей в сцене - около 11px на экране при любом размере сцены */
-    var sc = $('.scene'); if (sc && sc.offsetWidth) sc.style.setProperty('--lbfs', (11 * 740 / (sc.offsetWidth * 1.1)).toFixed(1) + 'px');
+    var sc = $('.scene'); if (sc && sc.offsetWidth) {
+      var fs = 11 * 740 / (sc.offsetWidth * 1.1);
+      /* на маленькой сцене подписи деталей слипаются - тогда их не показываем */
+      sc.classList.toggle('no-lb', fs > 27);
+      sc.style.setProperty('--lbfs', Math.min(fs, 27).toFixed(1) + 'px');
+    }
   }
 
   /* ---------- раскрытие кадра деталями, как на карте раскроя ---------- */
@@ -210,42 +226,50 @@
     G.set([labels, '.sc-led', '.sc-deco', '.sc-ghost', '.sc-holes', saw], { autoAlpha: 0 });
     tiles.forEach(function (tl) { G.set(tl, Object.assign({ opacity: 0 }, tl._from)); });
 
+    var steps = $$('.scene__cap .st', scene);
     var tl = G.timeline({ paused: true, defaults: { ease: 'power3.out' } });
-    tl.to('.sheet__b', { strokeDashoffset: 0, duration: 0.9, ease: 'power2.inOut' }, 0)
-      .to('.sheet__b', { fillOpacity: 1, duration: 0.6 }, 0.35)
-      .to(parts, { autoAlpha: 0.55, duration: 0.5, stagger: 0.02 }, 0.7)
-      .set(saw, { autoAlpha: 1 }, 1.0);
-    var tc = 1.0;
+    tl.to('.sheet__b', { strokeDashoffset: 0, duration: 0.55, ease: 'power2.inOut' }, 0)
+      .to('.sheet__b', { fillOpacity: 1, duration: 0.4 }, 0.2)
+      .to(parts, { autoAlpha: 0.55, duration: 0.35, stagger: 0.01 }, 0.4)
+      .set(saw, { autoAlpha: 1 }, 0.55);
+    var tc = 0.55;
     cutl.forEach(function (c) {
       var x1 = +c.getAttribute('x1'), y1 = +c.getAttribute('y1'), x2 = +c.getAttribute('x2'), y2 = +c.getAttribute('y2');
-      var dur = Math.abs(x2 - x1) > 200 ? 0.24 : 0.14;
+      var dur = Math.abs(x2 - x1) > 200 ? 0.11 : 0.06;
       tl.to(c, { strokeDashoffset: 0, duration: dur, ease: 'none' }, tc)
         .fromTo(saw, { attr: { cx: x1, cy: y1 } }, { attr: { cx: x2, cy: y2 }, duration: dur, ease: 'none', immediateRender: false }, tc);
-      tc += dur + 0.02;
+      tc += dur + 0.01;
     });
-    tl.to(saw, { autoAlpha: 0, duration: 0.2 }, tc)
-      .to(parts, { autoAlpha: 1, duration: 0.4 }, tc - 0.3)
-      .to(labels, { autoAlpha: 1, duration: 0.4, stagger: 0.08 }, 1.5)
-      .addLabel('cut', tc + 0.5);
-    var t0 = tc + 0.7;
-    tl.to(labels, { autoAlpha: 0, duration: 0.3 }, t0)
-      .to(cam, { scale: 1, x: 0, y: 0, duration: 1.2, ease: 'power2.inOut' }, t0)
-      .to(['.sc-ghost', '.sc-holes'], { autoAlpha: 1, duration: 0.6 }, t0 + 0.2);
-    var tp = t0 + 0.5;
+    tl.to(saw, { autoAlpha: 0, duration: 0.15 }, tc)
+      .to(parts, { autoAlpha: 1, duration: 0.3 }, tc - 0.2)
+      .to(labels, { autoAlpha: 1, duration: 0.3, stagger: 0.05 }, 0.7)
+      .addLabel('cut', tc + 0.3);
+    var t0 = tc + 0.35;
+    tl.to(labels, { autoAlpha: 0, duration: 0.25 }, t0)
+      .to(cam, { scale: 1, x: 0, y: 0, duration: 0.8, ease: 'power2.inOut' }, t0)
+      .to('.sc-ghost', { autoAlpha: 1, duration: 0.4 }, t0 + 0.1);
+    var tp = t0 + 0.25;
     order.forEach(function (p) {
-      tl.to(p, { x: 0, rotation: 0, duration: 0.36, ease: 'power2.inOut' }, tp)
-        .to(p, { y: 0, duration: 0.62, ease: 'power3.out' }, tp + 0.3);
-      tp += 0.13;
+      tl.to(p, { x: 0, rotation: 0, duration: 0.3, ease: 'power2.inOut' }, tp)
+        .to(p, { y: 0, duration: 0.45, ease: 'power3.out' }, tp + 0.2);
+      tp += 0.05;
     });
-    var te = tp + 0.85;
-    tl.to('.sc-led', { autoAlpha: 1, duration: 0.5 }, te)
-      .to('.sc-deco', { autoAlpha: 1, duration: 0.4 }, te)
-      .to('.sc-cuts', { autoAlpha: 0.35, duration: 0.5 }, te);
+    var te = tp + 0.5;
+    tl.to('.sc-led', { autoAlpha: 1, duration: 0.35 }, te)
+      .to('.sc-deco', { autoAlpha: 1, duration: 0.3 }, te)
+      .to(['.sc-sheet', '.sc-cuts'], { autoAlpha: 0, duration: 0.5 }, te);
+    var tf = te + 0.35;
     tiles.forEach(function (ti, i) {
-      tl.to(ti, { xPercent: 0, yPercent: 0, opacity: 1, duration: 0.9 }, te + 0.75 + i * 0.09);
+      tl.to(ti, { xPercent: 0, yPercent: 0, opacity: 1, duration: 0.7 }, tf + i * 0.06);
     });
-    tl.to(['.sc-parts', '.sc-led', '.sc-deco', '.sc-ghost'], { autoAlpha: 0, duration: 0.5 }, te + 1.5)
-      .to(['.sc-sheet', '.sc-holes', '.sc-cuts'], { opacity: 0.45, duration: 0.6 }, te + 1.2);
+    tl.to(['.sc-parts', '.sc-led', '.sc-deco', '.sc-ghost'], { autoAlpha: 0, duration: 0.4 }, tf + 0.7);
+    /* подпись этапов следует за таймлайном и при прокрутке назад */
+    var marks = [0, 0.55, tf];
+    tl.eventCallback('onUpdate', function () {
+      var t = tl.time();
+      steps.forEach(function (st, i) { st.classList.toggle('is-on', t >= marks[i]); });
+    });
+    tl.progress(0.0001).progress(0);
 
     var floor = tl.labels.cut / tl.duration();
     var auto = G.to(tl, { progress: 1, duration: tl.duration(), ease: 'none', paused: true });
@@ -257,7 +281,6 @@
 
     var mm = G.matchMedia();
     mm.add('(min-width: 901px) and (min-height: 600px)', function () {
-      var txt = $('.hero__txt');
       var camTl = G.timeline({
         scrollTrigger: {
           trigger: heroEl, start: 'top top', end: '+=75%', pin: true, scrub: 0.5, anticipatePin: 1,
@@ -270,8 +293,7 @@
       });
       camTl.to(scene, { scale: 1.07, xPercent: -5, ease: 'none', duration: 1 }, 0)
         .to('.shop__far', { xPercent: 2.5, ease: 'none', duration: 1 }, 0)
-        .to('.hero__map', { xPercent: -2, ease: 'none', duration: 1 }, 0)
-        .to(txt, { autoAlpha: 0.25, y: -24, ease: 'none', duration: 0.35 }, 0.65);
+        .to('.hero__map', { xPercent: -2, ease: 'none', duration: 1 }, 0);
     });
 
     new IntersectionObserver(function (es) {
@@ -305,9 +327,8 @@
     mm.add('(min-width: 901px)', function () {
       var list = $$('.plate');
       list.forEach(function (p, i) {
-        var txt = $$('.plate__txt > *:not(.plate__ghost)', p), ghost = $('.plate__ghost', p);
+        var txt = $$('.plate__txt > *', p);
         G.from(txt, { y: 34, autoAlpha: 0, duration: 0.9, stagger: 0.08, ease: 'power3.out', scrollTrigger: { trigger: p, start: 'top 55%', once: true } });
-        if (ghost) G.fromTo(ghost, { xPercent: -5 }, { xPercent: 5, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: true } });
         var next = list[i + 1]; if (!next) return;
         G.to($('.plate__in', p), { scale: 0.93, yPercent: -3, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top', scrub: true } });
         G.to(p, { '--dim': 0.6, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top', scrub: true } });

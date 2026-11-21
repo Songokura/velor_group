@@ -28,7 +28,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/forum-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261120-2">
+<link rel="stylesheet" href="styles.css?v=20261121-1">
 <script>document.documentElement.classList.add("js");setTimeout(function(){document.documentElement.classList.add("is-ready")},3500)</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FurnitureStore","@id":"https://songokura.github.io/velor_group/#org","name":"Velor Group","description":"Корпусная мебель на заказ под ключ: кухни, шкафы, гардеробы, детская мебель. Собственное производство.","url":"https://songokura.github.io/velor_group/","logo":"https://songokura.github.io/velor_group/assets/logo.svg","image":"https://songokura.github.io/velor_group/assets/og-image.jpg","telephone":"+77710020909","priceRange":"от 80 000 ₸","address":{"@type":"PostalAddress","streetAddress":"улица Аймаутова, 143а","addressLocality":"Шымкент","addressCountry":"KZ"},"areaServed":[{"@type":"City","name":"Шымкент"},{"@type":"AdministrativeArea","name":"Туркестанская область"}],"sameAs":["https://www.instagram.com/velor_group/"]}
@@ -96,7 +96,7 @@
         <g><path d="M1760 742V330h130v412M1760 470h130M1760 610h130"/></g>
       </g>
       <g class="shop__lamp">
-        <path d="M1090 0v96" stroke="#B8915A" stroke-opacity=".5" stroke-width="1.5"/>
+        <path d="M1090 -600v696" stroke="#B8915A" stroke-opacity=".5" stroke-width="1.5"/>
         <path d="M1052 132q38-52 76 0z" fill="#2C2019" stroke="#DCC08A" stroke-opacity=".7" stroke-width="1.5"/>
         <path class="lamp__cone" d="M1056 132h68l330 620H720z" fill="url(#cone)"/>
         <ellipse cx="1090" cy="134" rx="30" ry="5" fill="#FFE9B8" fill-opacity=".8"/>
@@ -107,7 +107,7 @@
   </div>
   <div class="hero__in wrap">
     <div class="hero__txt">
-      <p class="kick" data-i18n="hero.kick">Шымкент · Собственное производство<span class="m-short"> · 6 лет на рынке</span></p>
+      <p class="kick" data-i18n="hero.kick">Шымкент · Собственное производство<span class="m-short">&nbsp;· 6&nbsp;лет на рынке</span></p>
       <h1 class="hero__h" data-i18n="hero.h1">Корпусная мебель на заказ в Шымкенте - <em>собственное производство</em></h1>
       <p class="hero__lead" data-i18n="hero.lead">Изготавливаем кухни, шкафы, гардеробы и детские под ключ - от замера до установки. <span class="m-off">Работаем по письменному договору, замер бесплатный. </span>Стоимость - от 80&nbsp;000&nbsp;₸.</p>
       <div class="hero__btns">
@@ -138,6 +138,7 @@
 <circle class="sc-saw" cx="60" cy="440.5" r="13" fill="url(#sawg)"/>
 </g>
 </svg>
+      <p class="scene__cap" aria-hidden="true"><span class="st is-on" data-i18n="hero.st1">Лист ЛДСП</span><i>→</i><span class="st is-on" data-i18n="hero.st2">Раскрой в нашем цехе</span><i>→</i><span class="st is-on is-last" data-i18n="hero.st3">Ваша кухня</span></p>
       <figure class="scene__photo cut" data-cut="a" data-manual>
         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-lsrc="assets/photos/hero-5.webp" width="1320" height="1310" alt="Кухня Velor Group: белые фасады, ниша под дуб, верхние шкафы до потолка" data-i18n-attr="alt:hero.alt" decoding="async">
       </figure>
@@ -169,7 +170,6 @@
   <section class="plate plate--a" id="kuhni">
     <div class="plate__in wrap">
       <div class="plate__txt">
-        <span class="plate__ghost" aria-hidden="true" data-i18n="nav.kuhni">Кухни</span>
         <h3 class="h3" data-i18n="k.h">Кухни на заказ</h3>
         <p class="plate__p" data-i18n="k.p">Прямые и угловые кухни с верхними шкафами до потолка. Фасады из крашеного МДФ и плит EGGER, витрины со стеклом, подсветка рабочей зоны.</p>
         <ul class="ticks">
@@ -193,7 +193,6 @@
   <section class="plate plate--b plate--flip" id="shkafy">
     <div class="plate__in wrap">
       <div class="plate__txt">
-        <span class="plate__ghost" aria-hidden="true" data-i18n="nav.shkafy">Шкафы</span>
         <h3 class="h3" data-i18n="s.h">Шкафы на заказ</h3>
         <p class="plate__p" data-i18n="s.p">Встроенные шкафы от пола до потолка и от стены до стены. Глухие фасады или секция-витрина со стеклом и подсветкой.</p>
         <ul class="ticks">
@@ -212,14 +211,13 @@
   <section class="plate plate--c" id="garderoby">
     <div class="plate__in wrap">
       <div class="plate__txt">
-        <span class="plate__ghost" aria-hidden="true" data-i18n="nav.garderoby">Гардеробы</span>
         <h3 class="h3" data-i18n="g.h">Гардеробы на заказ</h3>
         <p class="plate__p" data-i18n="g.p">Гардеробы под размеры помещения: секции для длинной и короткой одежды, полки, ящики. Состав секций согласуем в проекте до подписания договора.</p>
         <a class="btn btn--gold" data-wa="wardrobe" href="https://wa.me/77710020909" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#ic-wa"/></svg><span data-i18n="g.btn">Рассчитать гардероб</span></a>
       </div>
       <div class="plate__media solo">
         <svg class="solo__lines" viewBox="0 0 600 700" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 60h600M0 640h600M70 0v700M530 0v700" pathLength="1"/></svg>
-        <figure class="cut solo__ph" data-cut="a"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-lsrc="assets/photos/plate-11.webp" width="1572" height="2000" loading="lazy" decoding="async" alt="Шкаф с секцией-витриной" data-i18n-attr="alt:wrk.c11"></figure>
+        <figure class="cut solo__ph" data-cut="a"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-lsrc="assets/photos/plate-11b.webp" width="1278" height="1626" loading="lazy" decoding="async" alt="Шкаф с секцией-витриной" data-i18n-attr="alt:wrk.c11"></figure>
       </div>
     </div>
   </section>
@@ -373,7 +371,7 @@
         <li><span class="steps__n">02</span><h3 data-i18n="how.s2h">Проект и расчёт</h3><p data-i18n="how.s2p">Согласуем планировку, материалы и стоимость.</p></li>
         <li><span class="steps__n">03</span><h3 data-i18n="how.s3h">Договор</h3><p data-i18n="how.s3p">Заключаем письменный договор. Срок изготовления оговариваем индивидуально.</p></li>
         <li><span class="steps__n">04</span><h3 data-i18n="how.s4h">Изготовление</h3><p data-i18n="how.s4p">Раскрой и сборка в собственном цехе.</p></li>
-        <li><span class="steps__n">05</span><h3 data-i18n="how.s5h">Установка</h3><p data-i18n="how.s5p">Мебель устанавливают наши мастера. Гарантия на работу - 2 года.</p></li>
+        <li><span class="steps__n">05</span><h3 data-i18n="how.s5h">Установка</h3><p data-i18n="how.s5p">Мебель устанавливают наши мастера. Гарантия на работу - 2&nbsp;года.</p></li>
       </ol>
     </div>
   </div>
@@ -388,11 +386,11 @@
       <figure class="cond__ph cut" data-cut="a"><img src="assets/photos/card-9.webp" width="1040" height="780" loading="lazy" decoding="async" alt="Кухня с витриной над верхними шкафами" data-i18n-attr="alt:cond.alt"></figure>
       <div class="cond__r">
         <ul class="cond__list">
-          <li><h3 data-i18n="cond.i1h">Письменный договор.</h3><p data-i18n="cond.i1p">Условия заказа фиксируются в договоре до начала работ.</p></li>
-          <li><h3 data-i18n="cond.i2h">Гарантия на работу - 2 года.</h3></li>
-          <li><h3 data-i18n="cond.i3h">Бесплатный замер.</h3></li>
-          <li><h3 data-i18n="cond.i4h">Мойка и подсветка в подарок.</h3></li>
-          <li class="cond__price"><h3 data-i18n="cond.i5h">Стоимость - от 80&nbsp;000&nbsp;₸.</h3><p data-i18n="cond.i5p">Точную цену называем после замера и расчёта.</p></li>
+          <li><h3 data-i18n="cond.i1h">Письменный договор</h3><p data-i18n="cond.i1p">Условия заказа фиксируются в договоре до начала работ.</p></li>
+          <li><h3 data-i18n="cond.i2h">Гарантия на работу - 2&nbsp;года</h3></li>
+          <li><h3 data-i18n="cond.i3h">Бесплатный замер</h3></li>
+          <li><h3 data-i18n="cond.i4h">Мойка и подсветка в подарок</h3></li>
+          <li class="cond__price"><h3 data-i18n="cond.i5h">Стоимость - от 80&nbsp;000&nbsp;₸</h3><p data-i18n="cond.i5p">Точную цену называем после замера и расчёта.</p></li>
         </ul>
         <a class="btn btn--ink btn--lg" data-wa="common" href="https://wa.me/77710020909" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#ic-wa"/></svg><span data-i18n="cta.calc">Рассчитать стоимость</span></a>
       </div>
@@ -449,7 +447,7 @@
       </div>
     </div>
     <div class="map">
-      <iframe title="Шымкент, улица Аймаутова, 143а" data-i18n-attr="title:cont.map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%D0%A8%D1%8B%D0%BC%D0%BA%D0%B5%D0%BD%D1%82%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%90%D0%B9%D0%BC%D0%B0%D1%83%D1%82%D0%BE%D0%B2%D0%B0%2C%20143%D0%B0&z=15&output=embed"></iframe>
+      <iframe title="Шымкент, улица Аймаутова, 143а" data-i18n-attr="title:cont.map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%D0%A8%D1%8B%D0%BC%D0%BA%D0%B5%D0%BD%D1%82%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%90%D0%B9%D0%BC%D0%B0%D1%83%D1%82%D0%BE%D0%B2%D0%B0%2C%20143%D0%B0&z=15&hl=ru&output=embed"></iframe>
     </div>
   </div>
 </section>
@@ -478,6 +476,6 @@
   <a class="bar__ig" href="https://www.instagram.com/velor_group/" target="_blank" rel="noopener" aria-label="Работы Velor Group в Instagram" data-i18n-attr="aria-label:hdr.ig"><svg class="ic" aria-hidden="true"><use href="#ic-ig"/></svg></a>
 </nav>
 
-<script src="script.js?v=20261120-2" defer></script>
+<script src="script.js?v=20261121-1" defer></script>
 </body>
 </html>
