@@ -477,3 +477,9 @@ a,button,label,summary{-webkit-tap-highlight-color:transparent;touch-action:mani
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* видео клиента 23.11.2026: петли в плитах шкафов и гардеробов, детская */
+.solo__v{position:absolute;bottom:0;width:30%;aspect-ratio:9/16;border-radius:var(--r);overflow:hidden;outline:6px solid #241a14;box-shadow:0 30px 60px -24px rgba(0,0,0,.75);z-index:2}
+.plate--flip .solo__v{right:0}
+.plate:not(.plate--flip) .solo__v{left:0}
+.kids__v{position:relative;aspect-ratio:4/5;width:100%;max-width:520px;max-height:78svh;justify-self:center;border-radius:var(--r);overflow:hidden;background:#241a14;box-shadow:0 30px 60px -30px rgba(42,33,27,.6)}
